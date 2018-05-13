@@ -1,0 +1,20 @@
+<navbar></navbar>
+<div class="container">
+  <h2>Add new book to your collection</h2>
+  <form #linkForm = "ngForm" (ngSubmit) = "add_by_link(linkForm)">
+    <label for="link">Link</label>
+    <input type="text" name="link" id="link" ngModel>
+    <button type="submit">Add book</button>
+  </form>
+  <form #fieldsForm = "ngForm" (ngSubmit)="add_by_hand(fieldsForm)">
+    <label for="title">Title</label>
+    <input type="text" name="title" id="title" ngModel>
+    <label for="author">Author</label>
+    <input type="text" name="author" id="author" ngModel>
+    <label for="year">Year</label>
+    <input type="number" name="year" id="year" ngModel>
+    <label for="pages">Pages</label>
+    <input type="number" name="pages" id="pages" ngModel>
+    <button type="submit">Add book</button>
+
+</div>

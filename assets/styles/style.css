@@ -1,0 +1,21 @@
+.container{
+    min-width: 90%;
+}
+table{
+  min-width: 100%;
+}
+a{
+  cursor: pointer;
+}
+div{
+  border-radius: 3px;
+}
+div.info{
+  border: 1px solid blue;
+  background-color: aqua;
+}
+div.error{
+  border: 1px solid red;
+  background-color: salmon;
+
+}

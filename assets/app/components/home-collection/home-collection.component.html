@@ -1,0 +1,53 @@
+<navbar></navbar>
+<div class="container">
+  <div *ngIf="collection==undefined">
+    <h3>Create collection</h3>
+
+    <form #collectionForm="ngForm" (ngSubmit)="createCollection(collectionForm)">
+        <label for="name">Collection name</label>
+        <input type="text" name="name" id="name" ngModel>
+
+        <button type="submit">Create collection</button>
+    </form>
+    <div *ngIf = "error!=undefined" class="error">
+      {{error}}
+    </div>
+    <div *ngIf = "info!=undefined" class="info">
+      {{info}}
+    </div>
+  </div>
+  <div *ngIf="collection!=undefined">
+    <h2>{{collection.name}}</h2>
+
+    <table>
+      <tr>
+        <td>
+          <h3>Books</h3>
+          <p class="pull-left">
+            <a (click)="navigate_book()">
+              <span class="glyphicon glyphicon-plus"></span> Add new book
+            </a>
+          </p>
+        </td>
+          <h3>Users</h3>
+          <p class="pull-left">
+            <a (click)="navigate_user()">
+              <span class="glyphicon glyphicon-plus"></span> Add new user
+            </a>
+          </p>
+        <td>
+          <h3>Rented</h3>
+          <p class="pull-left">
+            <a (click)="navigate_rent()">
+              <span class="glyphicon glyphicon-plus"></span> Rent a book
+            </a>
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

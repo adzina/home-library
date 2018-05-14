@@ -8,7 +8,7 @@ module.exports = {
         email= req.param("email"),
         password= req.param("password");
 
-    return sails.models.user2.create({username:username,
+    return sails.models.user.create({username:username,
                                     email: email,
                                     password: password,
                                     confirmed: false})
@@ -28,7 +28,7 @@ module.exports = {
     /**
      * check if the username matches any users
      */
-    sails.models.user2.findOne({
+    sails.models.user.findOne({
       username: req.body.username
     }).exec(function callback(err, user) {
       if (err) {

@@ -57,8 +57,8 @@ module.exports.routes = {
      'GET /reading/nowRead': 'ReadingController.getNowRead',
 
 
-     'POST /user': 'User2Controller.create',
-     'POST /user/login': 'User2Controller.login',
-     'GET /user/findByID': 'User2Controller.findByID',
+     'POST /user': 'UserController.create',
+     'POST /user/login': 'UserController.login',
+     'GET /user/findByID': 'UserController.findByID',
 
 };

@@ -1,7 +1,7 @@
 var bcrypt=require("bcryptjs");
 
 module.exports = {
-  tableName: "users2",
+  tableName: "users",
 	attributes: {
 		username: {type:'string',required:'true',unique: true},
 		email: {type:'email', required: 'true', unique: true},

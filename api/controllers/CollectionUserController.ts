@@ -6,7 +6,7 @@ module.exports = {
     this.getUsersID(collectionID,UsersID=>{
       var output = [];
       async.each(UsersID, function(userID, cb){
-        sails.models.user2.findOne({id: userID})
+        sails.models.user.findOne({id: userID})
           .then(function(user){
             output.push({username:user.username, id: user.id, email: user.email, confirmed: user.confirmed});
             cb();

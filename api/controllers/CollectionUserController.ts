@@ -40,6 +40,46 @@ module.exports = {
           return callback(output);
         })
   },
+
+  getUserCollections: function(req,res){
+    let userID = req.param("userID");
+    this.getCollectionsID(userID,CollectionsID=>{
+      var output = [];
+      async.each(CollectionsID, function(collectionID, cb){
+        sails.models.collection.findOne({id: collectionID})
+          .then(function(collection){
+            output.push({name:collection.name, id: collection.id, ownerID: collection.ownerID});
+            cb();
+          }).fail(function(error){
+            sails.log.debug("Error in getUserCollections");
+            sails.log.error(error);
+            cb(error);
+          })
+      }, function(error){
+        if(error) {
+          sails.log.debug("Error in getUserCollections");
+          sails.log.error(error);
+          return res.negotiate(error);}
+
+        return res.json(output);
+      });
+
+  })
+  },
+    getCollectionsID:function(_userID,callback){
+      sails.models.collectionuser.find({userID:_userID})
+        .exec(function(err,collections){
+          if(err) {
+            sails.log.debug("Error in getCollecionsID");
+            sails.log.error(err);}
+          var output:string[];
+          output=[];
+          for(var i=0;i<collections.length;i++){
+            output[i]=collections[i].collectionID;
+          }
+          return callback(output);
+        })
+  },
   addUserToCollection: function(req,res){
     sails.models.collectionuser.create({collectionID: req.param("collectionID"),userID: req.param("userID")})
       .exec(function(err, collectionUser){

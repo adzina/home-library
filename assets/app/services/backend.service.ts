@@ -58,4 +58,10 @@ export class BackendService{
     return this.http.get(url).map((res: Response)=> res.json())
     .catch(err=> Observable.throw("Error getting collection's User"))
   }
+
+  getMyCollections(userID: string): Observable<Collection[]>{
+    let  url = this.url+"/userCollection/"+userID;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=> Observable.throw("Error getting my collections"))
+  }
 }

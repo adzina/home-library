@@ -44,8 +44,9 @@ module.exports.routes = {
      'GET /collectionBook/:collectionID': 'CollectionBookController.getCollectionBooks',
 
      'GET /collectionUser/:collectionID': 'CollectionUserController.getCollectionUsers',
+     'GET /userCollection/:userID': 'CollectionUserController.getUserCollections',
      'POST /collectionUser': 'CollectionUserController.addUserToCollection',
-     
+
      'GET /comment/booksComments': 'CommentController.getBooksComments',
 
      'GET /loan/myLoans': 'LoanController/getMyLoans',

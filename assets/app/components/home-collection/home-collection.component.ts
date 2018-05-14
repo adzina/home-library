@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { Collection } from '../../models/collection';
 import { Book } from '../../models/book';
 import { User } from '../../models/user';
+import { Reading } from '../../models/reading';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './home-collection.component.html'
@@ -19,6 +20,9 @@ export class HomeCollectionComponent implements OnInit {
   private error: string
   private books: Book[];
   private users: User[];
+  private currentlyRead: Book[];
+  private availableToMe: Book[];
+  private readings: Reading[];
   ngOnInit() {
     this.userID = localStorage.getItem("userID")
     this.getMyCollection()
@@ -28,6 +32,7 @@ export class HomeCollectionComponent implements OnInit {
       this.collection = data;
       this._backendService.getCollectionBooks(this.collection.id).subscribe(data=>{
         this.books = data;
+        this.divideBooks();
       },err=>{
         console.log(err)
       })
@@ -37,13 +42,37 @@ export class HomeCollectionComponent implements OnInit {
       },err=>{
         console.log(err)
       })
+
     },
       err=>{
         console.log(err)
       })
   }
+  divideBooks(){
+    this._backendService.getReadings().subscribe(data=>{
+      this.readings = data;
+      this.availableToMe = [];
+      this.currentlyRead = [];
+      let added :boolean;
+      for(let book of this.books){
+        added = false;
+        for(let reading of this.readings){
+          if(book.id == reading.bookID && this.userID == reading.userID && reading.end==""){
+            this.currentlyRead.push(book);
+            added = true
+            break;
+          }
+        }
+        if(!added){
+          this.availableToMe.push(book);
+        }
+      }
+      console.log(this.currentlyRead);
+      console.log(this.availableToMe);
+    })
+
+  }
   createCollection(form: NgForm) {
-    console.log(form.value["name"])
     this._backendService.createHomeCollection(this.userID, form.value["name"])
     .subscribe(data=>{
         this._backendService.addUserToCollection(data.id, this.userID).subscribe(data=>{
@@ -67,5 +96,15 @@ export class HomeCollectionComponent implements OnInit {
   navigate_rent(){
     this._router.navigate(['./rent-a-book']);
 
+  }
+  read(book: Book){
+    this._backendService.addReading(book.id, this.userID).subscribe(data=>{
+      this.divideBooks();
+    })
+  }
+  finish(book: Book){
+    this._backendService.updateReading(book.id, this.userID).subscribe(data=>{
+      this.divideBooks();
+    })
   }
 }

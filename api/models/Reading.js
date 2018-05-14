@@ -11,7 +11,7 @@ module.exports = {
     bookID: {type: 'string',required: true},
     userID: {type: 'string',required: true},
     start: {type: 'date', required: true},
-    end: {type: 'date', required: true }
+    end: {type: 'date' }
   },
   validationMessages: { //hand for i18n & l10n
      start: {

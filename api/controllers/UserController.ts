@@ -55,4 +55,20 @@ module.exports = {
 
     });
 },
+  getAllUsers: function(req,res){
+    return sails.models.user.find()
+      .exec(function (err:any, users:any){
+       if (err) {
+         sails.log.debug("Error in: get all users");
+         sails.log.error(err);
+         return res.serverError(err); }
+      let output = []
+       for (let u of users){
+         output.push({username: u.username, email: u.email, id: u.id})
+       }
+       sails.log.debug("Users found");
+       return res.json(output);
+
+     });
+  }
 };

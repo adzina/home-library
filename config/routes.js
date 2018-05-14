@@ -50,14 +50,17 @@ module.exports.routes = {
      'GET /comment/booksComments': 'CommentController.getBooksComments',
 
      'GET /loan/myLoans': 'LoanController/getMyLoans',
-
+     'POST /loan': 'LoanController/rentABook',
      'POST /reading/update': 'ReadingController.update',
+
      'GET /reading/myReadings': 'ReadingController.getMyReadings',
      'GET /reading/lastRead': 'ReadingController.getLastRead',
      'GET /reading/nowRead': 'ReadingController.getNowRead',
+     'PUT /reading': 'ReadingController.update',
 
 
      'POST /user': 'UserController.create',
+     'GET /user': 'UserController.getAllUsers',
      'POST /user/login': 'UserController.login',
      'GET /user/findByID': 'UserController.findByID',
 

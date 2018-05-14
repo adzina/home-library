@@ -6,6 +6,7 @@ import { AuthHttp} from 'angular2-jwt';
 import { Collection } from '../models/collection';
 import { Book } from '../models/book';
 import { User } from '../models/user';
+import { Reading } from '../models/reading';
 @Injectable()
 export class BackendService{
   constructor(private http:AuthHttp){}
@@ -18,50 +19,80 @@ export class BackendService{
   getHomeCollection(id: String): Observable<Collection>{
     let url = this.url+"/collection/homeCollection/"+id;
     return this.http.get(url).map((res:Response)=> res.json())
-    .catch(err=>Observable.throw("Error getting collection"))
+    .catch(err=>Observable.throw("Error getting collection"));
   }
 
   createHomeCollection(id:String, name:String): Observable<any>{
     let url = this.url+"/collection";
     let body = JSON.stringify({ownerID: id, name: name});
     return this.http.post(url, body).map((res: Response)=> res.json())
-    .catch(err=> Observable.throw("Error creating collection"))
+    .catch(err=> Observable.throw("Error creating collection"));
   }
   addUserToCollection(collectionID: String,userID: String): Observable<any>{
     console.log(collectionID, userID);
     let url = this.url+"/collectionUser";
     let body = JSON.stringify({collectionID: collectionID, userID: userID});
     return this.http.post(url, body).map((res: Response)=> res.json())
-    .catch(err=> Observable.throw("Error adding user to collection"))
+    .catch(err=> Observable.throw("Error adding user to collection"));
   }
   createBook(collectionID:string, title:string,author:string,
   year:number,pages:number):Observable<string>{
     let url = this.url+"/book";
     let body = JSON.stringify({collectionID: collectionID, title: title, author: author, year: year, pages:pages});
     return this.http.post(url, body).map((res: Response)=> res.json())
-    .catch(err=> Observable.throw("Error creating book"))
+    .catch(err=> Observable.throw("Error creating book"));
 
   }
   addBookToCollection(collectionID:string,bookID:string):Observable<any>{
     let url = this.url+"/collectionBook";
     let body = JSON.stringify({collectionID: collectionID, bookID: bookID, rented: false});
     return this.http.post(url, body).map((res: Response)=> res.json())
-    .catch(err=> Observable.throw("Error adding book to collection"))
+    .catch(err=> Observable.throw("Error adding book to collection"));
   }
   getCollectionBooks(collectionID: string): Observable<Book[]>{
     let url = this.url+"/collectionBook/"+collectionID;
     return this.http.get(url).map((res: Response)=> res.json())
-    .catch(err=> Observable.throw("Error getting collection's books"))
+    .catch(err=> Observable.throw("Error getting collection's books"));
   }
   getCollectionUsers(collectionID: string): Observable<User[]>{
     let url = this.url+"/collectionUser/"+collectionID;
     return this.http.get(url).map((res: Response)=> res.json())
-    .catch(err=> Observable.throw("Error getting collection's User"))
+    .catch(err=> Observable.throw("Error getting collection's User"));
   }
 
   getMyCollections(userID: string): Observable<Collection[]>{
     let  url = this.url+"/userCollection/"+userID;
     return this.http.get(url).map((res:Response)=> res.json())
-    .catch(err=> Observable.throw("Error getting my collections"))
+    .catch(err=> Observable.throw("Error getting my collections"));
+  }
+  getAllUsers(): Observable<User[]>{
+    let url = this.url+"/user";
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=> Observable.throw("Error getting all users"));
+  }
+  rentABook(userID:string, bookID: string): Observable<any>{
+    let url = this.url+"/loan";
+    let body = JSON.stringify({userID:userID, bookID: bookID});
+    return this.http.post(url, body).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error renting a book"));
+  }
+  addReading(bookID: string,userID:string): Observable<any>{
+    let url = this.url+"/reading";
+    let now = new Date();
+    let body = JSON.stringify({userID:userID, bookID: bookID, start:now, end:""});
+    return this.http.post(url, body).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error adding a reading a book"));
+  }
+  updateReading(bookID: string,userID:string): Observable<any>{
+    let url = this.url+"/reading";
+    let now = new Date();
+    let body = JSON.stringify({userID:userID, bookID: bookID, end:now});
+    return this.http.put(url, body).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error finishing reading a book"));
+  }
+  getReadings(): Observable<Reading[]>{
+    let url = this.url+"/reading";
+    return this.http.get(url).map((res:Response)=>res.json())
+    .catch(err=>Observable.throw("Error getting readings"));
   }
 }

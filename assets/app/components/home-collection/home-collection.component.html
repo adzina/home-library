@@ -28,8 +28,11 @@
               <span class="glyphicon glyphicon-plus"></span> Add new book
             </a>
           </p>
-          <div *ngFor="let book of books" class="enum">
-            <span><b>{{book.title}}</b>, {{book.author}}</span><button>Read</button>
+          <div *ngFor="let book of currentlyRead" class="enum">
+            <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="finish(book)">Finished</button>
+          </div>
+          <div *ngFor="let book of availableToMe" class="enum">
+            <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="read(book)">Read</button>
           </div>
         </td>
           <h3>Users</h3>

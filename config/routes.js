@@ -38,22 +38,18 @@ module.exports.routes = {
      '/register': {
        view: 'homepage'
      },
-     'POST /book': 'BookController.create',
 
-
-     'POST /collection':'CollectionController.create',
      'GET /collection/homeCollection/:ownerID': 'CollectionController.getHomeCollection',
 
+     'GET /collectionBook/:collectionID': 'CollectionBookController.getCollectionBooks',
 
-     'POST /comment': 'CommentController.create',
+     'GET /collectionUser/:collectionID': 'CollectionUserController.getCollectionUsers',
+     'POST /collectionUser': 'CollectionUserController.addUserToCollection',
+     
      'GET /comment/booksComments': 'CommentController.getBooksComments',
 
-
-     'POST /loan': 'LoanController.create',
      'GET /loan/myLoans': 'LoanController/getMyLoans',
 
-
-     'POST /reading': 'ReadingController.add',
      'POST /reading/update': 'ReadingController.update',
      'GET /reading/myReadings': 'ReadingController.getMyReadings',
      'GET /reading/lastRead': 'ReadingController.getLastRead',

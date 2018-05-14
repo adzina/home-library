@@ -3,18 +3,24 @@
   <h2>Add new book to your collection</h2>
   <form #linkForm = "ngForm" (ngSubmit) = "add_by_link(linkForm)">
     <label for="link">Link</label>
-    <input type="text" name="link" id="link" ngModel>
+    <input type="text" name="link" id="link" ngModel><br>
     <button type="submit">Add book</button>
-  </form>
+  </form><br>
   <form #fieldsForm = "ngForm" (ngSubmit)="add_by_hand(fieldsForm)">
     <label for="title">Title</label>
-    <input type="text" name="title" id="title" ngModel>
+    <input type="text" name="title" id="title" ngModel><br>
     <label for="author">Author</label>
-    <input type="text" name="author" id="author" ngModel>
+    <input type="text" name="author" id="author" ngModel><br>
     <label for="year">Year</label>
-    <input type="number" name="year" id="year" ngModel>
+    <input type="number" name="year" id="year" ngModel><br>
     <label for="pages">Pages</label>
-    <input type="number" name="pages" id="pages" ngModel>
+    <input type="number" name="pages" id="pages" ngModel><br>
     <button type="submit">Add book</button>
-
+  </form>
+  <div *ngIf="error!=undefined" class="error">
+    {{error}}
+  </div>
+  <div *ngIf="info!=undefined" class="info">
+    {{info}}
+  </div>
 </div>

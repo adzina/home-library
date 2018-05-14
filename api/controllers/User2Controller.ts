@@ -26,7 +26,7 @@ module.exports = {
   },
   login: function(req, res) {
     /**
-     * check if the username matches any username
+     * check if the username matches any users
      */
     sails.models.user2.findOne({
       username: req.body.username

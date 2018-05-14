@@ -28,6 +28,9 @@
               <span class="glyphicon glyphicon-plus"></span> Add new book
             </a>
           </p>
+          <div *ngFor="let book of books" class="enum">
+            <span><b>{{book.title}}</b>, {{book.author}}</span><button>Read</button>
+          </div>
         </td>
           <h3>Users</h3>
           <p class="pull-left">
@@ -35,6 +38,9 @@
               <span class="glyphicon glyphicon-plus"></span> Add new user
             </a>
           </p>
+          <div *ngFor="let user of users" class="enum">
+            <span *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
+          </div>
         <td>
           <h3>Rented</h3>
           <p class="pull-left">

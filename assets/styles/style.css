@@ -17,5 +17,24 @@ div.info{
 div.error{
   border: 1px solid red;
   background-color: salmon;
-
+}
+form{
+  display: block;
+}
+input{
+  min-width: 70%;
+}
+label{
+  min-width: 100px;
+  text-align: right;
+}
+button{
+  float: right;
+}
+p{
+  clear: both;
+}
+.enum{
+  clear:both;
+  max-width: 90%;
 }

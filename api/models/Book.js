@@ -11,8 +11,8 @@ module.exports = {
     title: {type: 'string', required: true},
     author: {type: 'string', required: true},
     collectionID: {type: 'string', required: true},
-    year: {type: 'date', required: true},
-    pages: {type: 'number', required: true }
+    year: {type: 'string', required: true},
+    pages: {type: 'string', required: true }
   },
   validationMessages: { //hand for i18n & l10n
      title: {

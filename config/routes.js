@@ -57,6 +57,8 @@ module.exports.routes = {
      'GET /reading/myReadings': 'ReadingController.getMyReadings',
      'GET /reading/lastRead/:userID': 'ReadingController.getLastRead',
      'GET /reading/nowRead/:userID': 'ReadingController.getNowRead',
+     'GET /reading/stats/:userID': 'ReadingController.countReadBooks',
+     'GET /reading/oldest/:userID': 'ReadingController.getOldestReading',
      'PUT /reading': 'ReadingController.update',
 
 

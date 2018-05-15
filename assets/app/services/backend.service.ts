@@ -105,4 +105,14 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=>res.json())
     .catch(err=>Observable.throw("Error getting now read books"));
   }
+  getOldestReading(userID:string): Observable<any>{
+    let url = this.url+"/reading/oldest/"+userID;
+    return this.http.get(url).map((res:Response)=>res.json())
+    .catch(err=>Observable.throw("Error getting oldest reading"));
+  }
+  getStats(userID:string): Observable<any>{
+    let url = this.url+"/reading/stats/"+userID;
+    return this.http.get(url).map((res:Response)=>res.json())
+    .catch(err=>Observable.throw("Error getting reading stats"));
+  }
 }

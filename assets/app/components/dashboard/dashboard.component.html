@@ -3,10 +3,16 @@
   <h3>Last read book:</h3>
   <div *ngIf = "lastReadBook!=undefined">
   <b>{{lastReadBook.title}}</b> {{lastReadBook.author}}
-</div>
+  </div>
   <h3>Now reading:</h3>
   <div *ngFor="let book of nowReading">
     <b>{{book.title}}</b> {{book.author}}
-
   </div>
+  <h3>Your stats:</h3>
+  <div *ngIf = "nr_books_read!=undefined">
+    <h4>Average of books per month:</h4>
+      <b>{{30*nr_books_read/diffDays}}</b>
+    <h4>Average of pages per day:</h4>
+      <b>{{nr_pages_read/diffDays}}</b>
+</div>
 </div>

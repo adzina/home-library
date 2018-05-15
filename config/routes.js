@@ -51,11 +51,12 @@ module.exports.routes = {
 
      'GET /loan/myLoans': 'LoanController/getMyLoans',
      'POST /loan': 'LoanController/rentABook',
+
      'POST /reading/update': 'ReadingController.update',
 
      'GET /reading/myReadings': 'ReadingController.getMyReadings',
-     'GET /reading/lastRead': 'ReadingController.getLastRead',
-     'GET /reading/nowRead': 'ReadingController.getNowRead',
+     'GET /reading/lastRead/:userID': 'ReadingController.getLastRead',
+     'GET /reading/nowRead/:userID': 'ReadingController.getNowRead',
      'PUT /reading': 'ReadingController.update',
 
 

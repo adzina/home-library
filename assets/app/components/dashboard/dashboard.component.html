@@ -1,4 +1,12 @@
 <navbar></navbar>
 <div class="container">
-  
+  <h3>Last read book:</h3>
+  <div *ngIf = "lastReadBook!=undefined">
+  <b>{{lastReadBook.title}}</b> {{lastReadBook.author}}
+</div>
+  <h3>Now reading:</h3>
+  <div *ngFor="let book of nowReading">
+    <b>{{book.title}}</b> {{book.author}}
+
+  </div>
 </div>

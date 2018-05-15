@@ -95,4 +95,14 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=>res.json())
     .catch(err=>Observable.throw("Error getting readings"));
   }
+  getLastReadBook(userID:string): Observable<Book>{
+    let url = this.url+"/reading/lastRead/"+userID;
+    return this.http.get(url).map((res:Response)=>res.json())
+    .catch(err=>Observable.throw("Error getting last read book"));
+  }
+  getNowReading(userID: string): Observable<Book[]>{
+    let url = this.url+"/reading/nowRead/"+userID;
+    return this.http.get(url).map((res:Response)=>res.json())
+    .catch(err=>Observable.throw("Error getting now read books"));
+  }
 }

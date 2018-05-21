@@ -39,6 +39,18 @@ export class DashboardComponent implements OnInit {
 
        })
      })
+     this._backendService.getHomeCollection(this.userID).subscribe(data=>{
+       this._backendService.findMyLoans(data.id).subscribe(d=>{
+         console.log("LOANS")
+         console.log(d)
+         this.myLoans = d;
+       })
+       this._backendService.findMyBorrowings(data.id).subscribe(d=>{
+         console.log("BORROWINGS")
+         console.log(d)
+         this.myBorrowings = d;
+       })
+     })
 
     /*
 Książki wypożyczone innym użytkownikom oraz książki wypożyczone od innych użytkowników

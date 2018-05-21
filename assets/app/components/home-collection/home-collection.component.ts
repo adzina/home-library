@@ -54,7 +54,7 @@ export class HomeCollectionComponent implements OnInit {
       })
   }
   getMyLoans(){
-    this._backendService.findMyLoans(this.collection.id).subscribe(data=>{
+    this._backendService.findMyBorrowings(this.collection.id).subscribe(data=>{
       this.loans = data;
     })
   }

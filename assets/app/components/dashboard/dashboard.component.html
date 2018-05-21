@@ -14,5 +14,15 @@
       <b>{{30*nr_books_read/diffDays}}</b>
     <h4>Average of pages per day:</h4>
       <b>{{nr_pages_read/diffDays}}</b>
-</div>
+  </div>
+
+  <h3>Loans:</h3>
+  <div *ngFor="let book of myLoans">
+    <b>{{book.title}}</b> {{book.author}}
+  </div>
+
+  <h3>Borrowings:</h3>
+  <div *ngFor="let book of myBorrowings">
+    <b>{{book.title}}</b> {{book.author}}
+  </div>
 </div>

@@ -88,10 +88,15 @@ export class BackendService{
     return this.http.post(url, body).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error renting a book"));
   }
-  findMyLoans(from_collectionID: string): Observable<Loan[]>{
+  findMyBorrowings(from_collectionID: string): Observable<Loan[]>{
     let url = this.url+"/loan/booksRentedFromMe/"+from_collectionID;
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error finding rented books"));
+  }
+  findMyLoans(to_collectionID: string): Observable<Loan[]>{
+    let url = this.url+"/loan/booksRentedToMe/"+to_collectionID;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error finding lend books"));
   }
   returnBook(loanID: string): Observable<any>{
     let url = this.url + "/loan/"+loanID;

@@ -8,18 +8,22 @@
 module.exports = {
   tableName: 'loans',
   attributes: {
-    collectionBookID: {type: 'string', required: true},
-    userID: {type: 'string', required: true},
+    to_collectionID: {type: 'string', required: true},
+    from_collectionID: {type: 'string', required: true},
+    bookID: {type: 'string', required: true},
     rentalDate: {type: 'date', required: true},
     returnDate: {type: 'date'}
   },
   validationMessages: { //hand for i18n & l10n
 
-     collectionBookID: {
-       required: 'collectionBookID is required'
+     to_collectionID: {
+       required: 'collectionID is required'
      },
-     userID:{
-       required: 'UserID is required'
+     from_collectionID: {
+       required: 'collectionID is required'
+     },
+     bookID:{
+       required: 'bookID is required'
      },
      rentalDate: {
         required: 'RentalDate is required'

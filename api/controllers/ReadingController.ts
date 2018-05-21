@@ -25,7 +25,9 @@ module.exports = {
 
 getReadingID:function(_userID,callback){
   sails.models.reading.find({userID:_userID}).sort('end DESC').exec(function(err,readings){
-    return callback(readings[0].bookID)
+    if(readings.length!=0)
+      return callback(readings[0].bookID)
+    return callback()  
     })
   },
 getNowRead:function(req,res){

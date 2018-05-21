@@ -1,1 +1,21 @@
 <navbar></navbar>
+<div class="container">
+  <form #rentForm ="ngForm" (ngSubmit) = "rentBook(rentForm)">
+    <label for="book" class="required">Book</label>
+    <select name="book"
+            class="form-control"  id="book" [(ngModel)]="book">
+      <option *ngFor="let book of books" [ngValue]="book">
+        {{book.title}} {{book.author}}
+      </option>
+    </select>
+    <label for="user" class="required">User</label>
+    <select name="user"
+            class="form-control"  id="user" [(ngModel)]="user">
+      <option *ngFor="let user of users" [ngValue]="user">
+        {{user.username}} {{user.email}}
+      </option>
+    </select>
+    <button type="submit">Rent</button>
+  </form>
+
+</div>

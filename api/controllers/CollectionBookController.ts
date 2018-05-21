@@ -39,5 +39,16 @@ module.exports = {
 		      }
 		      return callback(output);
 		    })
-},
+			},
+			removeBook:function(req, res){
+				sails.models.collectionbook.destroy({collectionID: req.param("collectionID"),
+																						bookID: req.param("bookID")}).exec(function(err, deleted){
+																							if(err){
+																								sails.log.debug("Error in removeBook");
+																								sails.log.error(err);
+																								return res.negotiate(err);
+																							}
+																							return res.json(200)
+																						})
+			}
 };

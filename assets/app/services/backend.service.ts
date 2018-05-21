@@ -29,7 +29,6 @@ export class BackendService{
     .catch(err=> Observable.throw("Error creating collection"));
   }
   addUserToCollection(collectionID: String,userID: String): Observable<any>{
-    console.log(collectionID, userID);
     let url = this.url+"/collectionUser";
     let body = JSON.stringify({collectionID: collectionID, userID: userID});
     return this.http.post(url, body).map((res: Response)=> res.json())
@@ -44,10 +43,16 @@ export class BackendService{
 
   }
   addBookToCollection(collectionID:string,bookID:string):Observable<any>{
-    let url = this.url+"/collectionBook";
-    let body = JSON.stringify({collectionID: collectionID, bookID: bookID, rented: false});
+    let url = this.url+"/collectionbook";
+    let body = JSON.stringify({collectionID: collectionID, bookID: bookID});
     return this.http.post(url, body).map((res: Response)=> res.json())
     .catch(err=> Observable.throw("Error adding book to collection"));
+  }
+  removeBookFromCollection(collectionID:string,bookID:string):Observable<any>{
+    let url = this.url+"/collectionbook/remove";
+    let body = JSON.stringify({collectionID: collectionID, bookID: bookID});
+    return this.http.post(url, body).map((res: Response)=> res.json())
+    .catch(err=> Observable.throw("Error removing book from collection"));
   }
   getCollectionBooks(collectionID: string): Observable<Book[]>{
     let url = this.url+"/collectionBook/"+collectionID;
@@ -70,9 +75,14 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=> Observable.throw("Error getting all users"));
   }
-  rentABook(userID:string, bookID: string): Observable<any>{
+  rentABook(from_collectionID: string, to_collectionID:string, bookID: string): Observable<any>{
     let url = this.url+"/loan";
-    let body = JSON.stringify({userID:userID, bookID: bookID});
+    let now = new Date();
+    let body = JSON.stringify({from_collectionID:from_collectionID,
+      to_collectionID:to_collectionID,
+      bookID: bookID,
+      rentalDate:now,
+      returnDate: ""});
     return this.http.post(url, body).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error renting a book"));
   }
@@ -115,4 +125,5 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=>res.json())
     .catch(err=>Observable.throw("Error getting reading stats"));
   }
+
 }

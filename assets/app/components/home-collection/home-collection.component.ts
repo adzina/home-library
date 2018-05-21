@@ -6,6 +6,7 @@ import { Collection } from '../../models/collection';
 import { Book } from '../../models/book';
 import { User } from '../../models/user';
 import { Reading } from '../../models/reading';
+import { Loan } from '../../models/loan';
 @Component({
   selector: 'app-dashboard',
   templateUrl: './home-collection.component.html'
@@ -23,6 +24,7 @@ export class HomeCollectionComponent implements OnInit {
   private currentlyRead: Book[];
   private availableToMe: Book[];
   private readings: Reading[];
+  private loans: Loan[];
   ngOnInit() {
     this.userID = localStorage.getItem("userID")
     this.getMyCollection()
@@ -30,6 +32,9 @@ export class HomeCollectionComponent implements OnInit {
   getMyCollection(){
     this._backendService.getHomeCollection(this.userID).subscribe(data=>{
       this.collection = data;
+
+      this.getMyLoans();
+
       this._backendService.getCollectionBooks(this.collection.id).subscribe(data=>{
         this.books = data;
         this.divideBooks();
@@ -47,6 +52,11 @@ export class HomeCollectionComponent implements OnInit {
       err=>{
         console.log(err)
       })
+  }
+  getMyLoans(){
+    this._backendService.findMyLoans(this.collection.id).subscribe(data=>{
+      this.loans = data;
+    })
   }
   divideBooks(){
     this._backendService.getReadings().subscribe(data=>{
@@ -67,8 +77,6 @@ export class HomeCollectionComponent implements OnInit {
           this.availableToMe.push(book);
         }
       }
-      console.log(this.currentlyRead);
-      console.log(this.availableToMe);
     })
 
   }
@@ -101,6 +109,18 @@ export class HomeCollectionComponent implements OnInit {
     this._backendService.addReading(book.id, this.userID).subscribe(data=>{
       this.divideBooks();
     })
+  }
+  return(loan: Loan){
+    this._backendService.removeBookFromCollection(loan.to, loan.bookID.toString()).subscribe(data1=>{
+      this._backendService.addBookToCollection(this.collection.id, loan.bookID).subscribe(data2=>{
+        this._backendService.returnBook(loan.loanID).subscribe(data3=>{
+          this.getMyLoans()
+          this.divideBooks()
+        })
+      });
+    })
+
+
   }
   finish(book: Book){
     this._backendService.updateReading(book.id, this.userID).subscribe(data=>{

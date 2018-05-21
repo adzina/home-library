@@ -42,12 +42,13 @@ module.exports = {
 			},
 			removeBook:function(req, res){
 				sails.models.collectionbook.destroy({collectionID: req.param("collectionID"),
-																						bookID: req.param("bookID")}).exec(function(err, deleted){
+																						bookID: req.param("bookID").toString()}).exec(function(err, deleted){
 																							if(err){
 																								sails.log.debug("Error in removeBook");
 																								sails.log.error(err);
 																								return res.negotiate(err);
 																							}
+																							console.log(deleted)
 																							return res.json(200)
 																						})
 			}

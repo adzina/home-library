@@ -51,6 +51,7 @@ module.exports.routes = {
      'GET /comment/booksComments': 'CommentController.getBooksComments',
 
      'GET /loan/myLoans': 'LoanController.getMyLoans',
+     'GET /loan/booksRentedFromMe/:from_collectionID': 'LoanController.getBooksRentedFromMe',
 
      'POST /reading/update': 'ReadingController.update',
 

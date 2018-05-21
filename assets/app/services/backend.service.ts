@@ -7,6 +7,8 @@ import { Collection } from '../models/collection';
 import { Book } from '../models/book';
 import { User } from '../models/user';
 import { Reading } from '../models/reading';
+import { Loan } from '../models/loan';
+
 @Injectable()
 export class BackendService{
   constructor(private http:AuthHttp){}
@@ -85,6 +87,18 @@ export class BackendService{
       returnDate: ""});
     return this.http.post(url, body).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error renting a book"));
+  }
+  findMyLoans(from_collectionID: string): Observable<Loan[]>{
+    let url = this.url+"/loan/booksRentedFromMe/"+from_collectionID;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error finding rented books"));
+  }
+  returnBook(loanID: string): Observable<any>{
+    let url = this.url + "/loan/"+loanID;
+    let now = new Date();
+    let body = JSON.stringify({returnDate:now})
+    return this.http.put(url, body).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error returning book"));
   }
   addReading(bookID: string,userID:string): Observable<any>{
     let url = this.url+"/reading";

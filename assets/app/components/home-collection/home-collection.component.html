@@ -51,6 +51,9 @@
               <span class="glyphicon glyphicon-plus"></span> Rent a book
             </a>
           </p>
+          <div *ngFor="let loan of loans" class="enum">
+            <b>{{loan.title}}</b> {{loan.author}} <button (click)="return(loan)">Return</button>
+          </div>
         </td>
       </tr>
       <tr>

@@ -46,4 +46,6 @@ module.exports.routes = {
      'POST /user/login': 'UserController.login',
      'GET /user/find/:email': 'UserController.find',
 
+     'POST /scrape': 'ScrapeController.scrape'
+
 };

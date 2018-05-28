@@ -21,8 +21,27 @@ module.exports = {
        sails.log.debug("User created");
        return res.json(200);
 
+
      });
 
+  },
+  find: function(req, res){
+    sails.models.user.findOne({
+      email: req.param("email")
+    }).exec(function callback(err, user) {
+      if (err) {
+        sails.log(err);
+        return res.serverError(err);}
+      if(user){
+        sails.log("user found");
+        return res.json({id: user.id});
+      }
+      if(!user){
+        sails.log("no such user")
+        return res.json({id: ""});
+      }
+
+    })
   },
   login: function(req, res) {
     /**

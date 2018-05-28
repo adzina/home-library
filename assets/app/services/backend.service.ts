@@ -144,5 +144,9 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=>res.json())
     .catch(err=>Observable.throw("Error getting reading stats"));
   }
-
+  findUserByEmail(email: string): Observable<any>{
+    let url = this.url+"/user/find/"+email;
+    return this.http.get(url).map((res:Response)=>res.json())
+    .catch(err=>Observable.throw("Error finding user"));
+  }
 }

@@ -1,5 +1,13 @@
+html, body, div{
+  background-color: #e0ebeb;
+}
+h2{
+  color: #ffb3b3;
+  font-weight: bold;
+  text-shadow: 1px 1px #595959;
+}
 .container{
-    min-width: 90%;
+    min-width: 100%;
 }
 table{
   min-width: 100%;
@@ -7,29 +15,64 @@ table{
 a{
   cursor: pointer;
 }
+.link{
+  cursor: pointer;
+  color:  #1ac6ff;
+}
 div{
   border-radius: 3px;
+  min-width: 100%;
 }
 div.info{
   border: 1px solid blue;
   background-color: aqua;
+  padding: 10%;
 }
 div.error{
   border: 1px solid red;
   background-color: salmon;
+  padding: 10%;
 }
 form{
   display: block;
 }
+.login-form{
+  max-width: 50%;
+  margin-bottom: 60px;
+}
 input{
-  min-width: 70%;
+  min-width: 100%;
 }
 label{
-  min-width: 100px;
-  text-align: right;
+  float: left;
+  text-align: left;
 }
 button{
   float: right;
+  border-radius: 5px;
+  background-color: #ffb3b3;
+  border: none;
+  font-size: 20px;
+}
+.login-label{
+  min-width: 0px;
+}
+.register-button{
+  margin-right: 50%;
+  float: right;
+  background: #1affa3;
+}
+div.container-elem{
+  max-width: 40%;
+  min-width: 40%;
+  float: left;
+  border: 1px black solid;
+  margin: 1%;
+  padding: 0% 0% 2% 2%;
+}
+.book-title{
+  font-style: italic;
+  font-size: 20px;
 }
 p{
   clear: both;
@@ -37,4 +80,9 @@ p{
 .enum{
   clear:both;
   max-width: 90%;
+}
+h3{
+  clear: both;
+  text-shadow: 1px 1px #595959;
+  color: #df80ff;
 }

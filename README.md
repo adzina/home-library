@@ -1,5 +1,6 @@
-# Web application for English School
+# Home library project
 
+This application allows users to create their own book collections, invite friends and rent books to people inside and outside the system.
 ### Prerequisites
 
 In order to use the project, its required that you have the following installed on your machine.
@@ -9,11 +10,11 @@ In order to use the project, its required that you have the following installed 
   - [Installing node on Ubuntu 16.04](https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-ubuntu-16-04)
   - [Installing node on windows, tutorial by treehouse](http://blog.teamtreehouse.com/install-node-js-npm-windows)
   - [Installing node on a Mac, tutorial by treehouse](http://blog.teamtreehouse.com/install-node-js-npm-mac)
-  
+
 - [Typescript](http://www.typescriptlang.org)
   Typescript is key to developing on angular2 and as such its required you have the typescript compiler installed globally, here how...
 ```
-$ npm install -g typescript 
+$ npm install -g typescript
 ```
 
 ## Getting Started
@@ -36,4 +37,4 @@ node app.js
 * [Angular](https://angular.io/) - The web framework used
 * [Sails](http://sailsjs.org) - Backend Framework Used
 * [Node](https://nodejs.org) - Runtime enviroment
-* [NPM](https://npmjs.com) - Dependency management 
+* [NPM](https://npmjs.com) - Dependency management

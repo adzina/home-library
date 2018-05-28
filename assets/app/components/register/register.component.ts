@@ -22,8 +22,9 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
   }
-  register(){
+  register1(){
     if(this.password==this.confirmed_password){
+
       let url = this._backendService.getUrl();
       let body = {username: this.username,
                   password: this.password,
@@ -38,5 +39,12 @@ export class RegisterComponent implements OnInit {
       })
     }
   }
-
+  register(){
+    console.log("akaka")
+    let body = {username: this.username,
+                password: this.password,
+                email: this.email};
+    return this._http.post('http://localhost:1337/email/', body)
+    ;
+  }
 }

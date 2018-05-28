@@ -44,6 +44,6 @@ module.exports.routes = {
      'POST /user': 'UserController.create',
      'GET /user': 'UserController.getAllUsers',
      'POST /user/login': 'UserController.login',
-     'GET /user/findByID': 'UserController.findByID',
+     'GET /user/find/:email': 'UserController.find',
 
 };

@@ -21,6 +21,7 @@
     "async": "^2.6.0",
     "bcryptjs": "^2.4.3",
     "bootstrap": "^4.0.0",
+    "cheerio": "^1.0.0-rc.2",
     "copy-webpack-plugin": "^4.0.1",
     "core-js": "^2.4.1",
     "css-loader": "^0.28.9",
@@ -46,6 +47,7 @@
     "jquery": "^3.3.1",
     "jsonwebtoken": "^8.1.1",
     "jwt-decode": "^2.2.0",
+    "mailgun.js": "^2.0.1",
     "minimatch": "^3.0.2",
     "ng2-completer": "^1.6.3",
     "ngx-bootstrap": "^2.0.2",
@@ -53,9 +55,11 @@
     "portfinder": "1.0.13",
     "rc": "1.0.1",
     "reflect-metadata": "^0.1.2",
+    "request": "^2.87.0",
     "rxjs": "5.4.3",
     "sails": "~0.12.13",
     "sails-disk": "~0.10.9",
+    "sails-hook-email": "^0.12.1",
     "sails-hook-validation": "^0.4.7",
     "sails-hook-webpack": "^2.0.4",
     "sails-mysql": "^0.11.5",
@@ -77,7 +81,7 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/mozartted/angular2+Sails.git"
+    "url": ""
   },
   "author": "mozartted",
   "license": "",

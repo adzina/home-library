@@ -1,0 +1,13 @@
+<navbar></navbar>
+<div class="container">
+  <h2>Add new user to collection</h2>
+  <form #addForm ="ngForm" (ngSubmit) = "sendInvite(addForm)">
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input id="email" type="email" name = "email" [(ngModel)]="email">
+    </div>
+
+    <button type="submit">Send invitation</button>
+  </form>
+</div>

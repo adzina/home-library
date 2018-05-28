@@ -13,7 +13,9 @@ export class NavbarComponent{
   constructor(private _router:Router){
   }
   logout(){
-    this._router.navigate(['./goodbye']);
+
+    localStorage.removeItem('token');
+    this._router.navigate(['/']);
   }
   navigate(nr: number){
     switch(nr){
@@ -22,4 +24,5 @@ export class NavbarComponent{
       case(3): this._router.navigate(['./libraries']);break;
     }
   }
+
 }

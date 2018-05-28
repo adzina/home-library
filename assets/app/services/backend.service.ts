@@ -23,7 +23,11 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error getting collection"));
   }
-
+  getCollectionByID(id: String): Observable<Collection>{
+    let url = this.url+"/collection/"+id;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error getting collection"));
+  }
   createHomeCollection(id:String, name:String): Observable<any>{
     let url = this.url+"/collection";
     let body = JSON.stringify({ownerID: id, name: name});

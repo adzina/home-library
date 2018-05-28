@@ -1,28 +1,36 @@
 <navbar></navbar>
 <div class="container">
-  <h3>Last read book:</h3>
-  <div *ngIf = "lastReadBook!=undefined">
-  <b>{{lastReadBook.title}}</b> {{lastReadBook.author}}
+  <div class="container-elem">
+    <h3>Last read book:</h3>
+    <div *ngIf = "lastReadBook!=undefined">
+    <span class="book-title">{{lastReadBook.title}}</span> {{lastReadBook.author}}
+    </div>
   </div>
-  <h3>Now reading:</h3>
-  <div *ngFor="let book of nowReading">
-    <b>{{book.title}}</b> {{book.author}}
+  <div class="container-elem">
+    <h3>Now reading:</h3>
+    <div *ngFor="let book of nowReading">
+      <span class="book-title">{{book.title}}</span> {{book.author}}
+    </div>
   </div>
+  <div class="container-elem">
   <h3>Your stats:</h3>
-  <div *ngIf = "nr_books_read!=undefined">
-    <h4>Average of books per month:</h4>
-      <b>{{30*nr_books_read/diffDays}}</b>
-    <h4>Average of pages per day:</h4>
-      <b>{{nr_pages_read/diffDays}}</b>
+    <div *ngIf = "nr_books_read!=undefined">
+      <p>Average of books per month:</p>
+        <b>{{30*nr_books_read/diffDays}}</b>
+      <p>Average of pages per day:</p>
+        <b>{{nr_pages_read/diffDays}}</b>
+    </div>
   </div>
-
-  <h3>Loans:</h3>
-  <div *ngFor="let book of myLoans">
-    <b>{{book.title}}</b> {{book.author}}
+  <div class="container-elem">
+    <h3>Loans:</h3>
+    <div *ngFor="let book of myLoans">
+      <b>{{book.title}}</b> {{book.author}}
+    </div>
   </div>
-
-  <h3>Borrowings:</h3>
-  <div *ngFor="let book of myBorrowings">
-    <b>{{book.title}}</b> {{book.author}}
+  <div class="container-elem">
+    <h3>Borrowings:</h3>
+    <div *ngFor="let book of myBorrowings">
+      <b>{{book.title}}</b> {{book.author}}
+    </div>
   </div>
 </div>

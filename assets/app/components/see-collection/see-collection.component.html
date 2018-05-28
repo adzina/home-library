@@ -1,0 +1,33 @@
+<navbar></navbar>
+<div class="container">
+  <div *ngIf="collection!=undefined">
+    <h2>{{collection.name}}</h2>
+
+    <table>
+      <tr>
+        <td>
+          <h3>Books</h3>
+          <p class="pull-left">
+            <a (click)="navigate_book()">
+              <span class="glyphicon glyphicon-plus"></span> Add new book
+            </a>
+          </p>
+          <div *ngFor="let book of currentlyRead" class="enum">
+            <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="finish(book)">Finished</button>
+          </div>
+          <div *ngFor="let book of availableToMe" class="enum">
+            <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="read(book)">Read</button>
+          </div>
+        </td>
+          <h3>Users</h3>
+          <div *ngFor="let user of users" class="enum">
+            <span *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
+          </div>
+      </tr>
+      <tr>
+        <td>
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>

@@ -4,6 +4,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeCollectionComponent } from './components/home-collection/home-collection.component';
+import { SeeCollectionComponent } from './components/see-collection/see-collection.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { LibrariesComponent } from './components/libraries/libraries.component';
 import { RentABookComponent } from './components/rent-a-book/rent-a-book.component';
@@ -25,6 +26,10 @@ export const routes = [
   {
     path: 'home-collection',
     component: HomeCollectionComponent,
+  },
+  {
+    path: 'see-collection',
+    component: SeeCollectionComponent,
   },
   {
     path: 'add-book',

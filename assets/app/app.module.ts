@@ -11,6 +11,7 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeCollectionComponent } from './components/home-collection/home-collection.component';
+import { SeeCollectionComponent } from './components/see-collection/see-collection.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { LibrariesComponent } from './components/libraries/libraries.component';
 import { RentABookComponent } from './components/rent-a-book/rent-a-book.component';
@@ -37,6 +38,7 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     RegisterComponent,
     DashboardComponent,
     HomeCollectionComponent,
+    SeeCollectionComponent,
     AddBookComponent,
     LibrariesComponent,
     RentABookComponent,

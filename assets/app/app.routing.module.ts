@@ -7,6 +7,7 @@ import { HomeCollectionComponent } from './components/home-collection/home-colle
 import { AddBookComponent } from './components/add-book/add-book.component';
 import { LibrariesComponent } from './components/libraries/libraries.component';
 import { RentABookComponent } from './components/rent-a-book/rent-a-book.component';
+import { AddUserComponent } from './components/add-user/add-user.component';
 // Define the routes
 export const routes = [
   {
@@ -36,6 +37,10 @@ export const routes = [
   {
     path: 'rent-a-book',
     component: RentABookComponent
+  },
+  {
+    path: 'add-user',
+    component: AddUserComponent
   },
 
    { //Redirect urls not found at root

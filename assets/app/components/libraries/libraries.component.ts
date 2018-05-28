@@ -18,6 +18,10 @@ export class LibrariesComponent implements OnInit {
       this.collections = data;
     })
   }
+  visitCollection(i:number){
+    localStorage.setItem("collectionID",this.collections[i].id);
+    this._router.navigate(["./see-collection"]);
+  }
 
 
 }

@@ -1,17 +1,17 @@
 <div class="container">
   <h2>Log in</h2>
-  <form>
+  <form class="login-form">
     <div class="form-group">
-      <label for="username">Username</label>
+      <label class="login-label" for="username">Username</label>
       <input id="username" type="text" name = "username" [(ngModel)]="username">
     </div>
     <div class="form-group">
-      <label for="password">Password</label>
+      <label class="login-label" for="password">Password</label>
       <input id="password" type="password" name = "password" [(ngModel)]="password">
     </div>
     <button type="submit" (click)="login()">Login</button>
   </form>
 
-  <h3>No account yet?</h3>
-  <button (click)="register()">Register</button>
+  No account yet?
+  <button (click)="register()" class="register-button">Register</button>
 </div>

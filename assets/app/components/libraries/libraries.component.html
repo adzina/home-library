@@ -1,7 +1,7 @@
 <navbar></navbar>
 <div class="container">
 <h3>Collections</h3>
-<div *ngFor="let c of collections">
-  {{c.name}}
+<div *ngFor="let c of collections; let i = index">
+  <div (click)="visitCollection(i)" class="link">  {{c.name}}</div>
 </div>
 </div>

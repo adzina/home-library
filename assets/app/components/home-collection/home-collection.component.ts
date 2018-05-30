@@ -56,7 +56,16 @@ export class HomeCollectionComponent implements OnInit {
   getMyLoans(){
     this._backendService.findMyBorrowings(this.collection.id).subscribe(data=>{
       this.loans = data;
+      console.log(this.loans)
     })
+  }
+  seeLoanDetails(i: number){
+
+    localStorage.setItem("author", this.loans[i].author);
+    localStorage.setItem("title", this.loans[i].title);
+    localStorage.setItem("rentalDate", this.loans[i].rentalDate);
+    localStorage.setItem("rentedToID", this.loans[i].userID);
+    this._router.navigate(['./rental-details']);
   }
   divideBooks(){
     this._backendService.getReadings().subscribe(data=>{

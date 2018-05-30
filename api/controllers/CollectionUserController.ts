@@ -84,13 +84,24 @@ module.exports = {
     sails.models.collectionuser.create({collectionID: req.param("collectionID"),userID: req.param("userID")})
       .exec(function(err, collectionUser){
         if(err){
-          sails.log.error(err);
-          return res.serverError(err); }
-
-        sails.log.debug("User added to collection");
-        return res.json(200);
+          if (err.code === 'E_UNIQUE')
+            try {
+              err = JSON.parse(err.details.last(err.details.length - 'Details: '.length))
+              sails.log.error(err);
+              return res.serverError(err);
+            } catch (e) { return res.serverError(400);}
+          else{
+            sails.log.error(err);
+            return res.serverError(err);
+            }
         }
+        if(collectionUser){
+          sails.log.debug("User added to collection");
+          return res.json(200);
+
+        }
+      }
       )
 
-    }
+    } 
 }

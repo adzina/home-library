@@ -81,14 +81,15 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=> Observable.throw("Error getting all users"));
   }
-  rentABook(from_collectionID: string, to_collectionID:string, bookID: string): Observable<any>{
+  rentABook(from_collectionID: string, to_collectionID:string, bookID: string, userID: string): Observable<any>{
     let url = this.url+"/loan";
     let now = new Date();
     let body = JSON.stringify({from_collectionID:from_collectionID,
       to_collectionID:to_collectionID,
       bookID: bookID,
       rentalDate:now,
-      returnDate: ""});
+      returnDate: "",
+      userID: userID});
     return this.http.post(url, body).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error renting a book"));
   }
@@ -152,5 +153,16 @@ export class BackendService{
     let url = this.url+"/user/find/"+email;
     return this.http.get(url).map((res:Response)=>res.json())
     .catch(err=>Observable.throw("Error finding user"));
+  }
+  scrapeWeb(urlToScrape: string): Observable<any>{
+    let url = this.url+"/scrape";
+    let body = JSON.stringify({url:urlToScrape});
+    return this.http.post(url, body).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error scraping the data"));
+  }
+  findUserByID(id: string): Observable<User>{
+    let url = this.url+"/user/"+ id;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error finding the user"));
   }
 }

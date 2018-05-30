@@ -12,7 +12,8 @@ module.exports = {
     from_collectionID: {type: 'string', required: true},
     bookID: {type: 'string', required: true},
     rentalDate: {type: 'date', required: true},
-    returnDate: {type: 'date'}
+    returnDate: {type: 'date'},
+    userID: {type: 'string', required: true}
   },
   validationMessages: { //hand for i18n & l10n
 
@@ -27,6 +28,9 @@ module.exports = {
      },
      rentalDate: {
         required: 'RentalDate is required'
+     },
+     userID: {
+        required: 'UserID is required'
      }
 
     },

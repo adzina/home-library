@@ -13,7 +13,7 @@ module.exports = {
       async.each(BooksID, function(bookID, cb){
         sails.models.book.findOne({id: bookID[0]})
           .then(function(book){
-            let elem = {title: book.title,author: book.author, bookID: book.id, to: bookID[1], loanID: bookID[2]};
+            let elem = {title: book.title,author: book.author, bookID: book.id, to: bookID[1], loanID: bookID[2], rentalDate: bookID[3], userID: bookID[4]};
             output.push(elem);
             console.log(elem)
             cb();
@@ -40,7 +40,7 @@ module.exports = {
       async.each(BooksID, function(bookID, cb){
         sails.models.book.findOne({id: bookID[0]})
           .then(function(book){
-            let elem = {title: book.title,author: book.author, bookID: book.id, from: bookID[1], loanID: bookID[2]};
+            let elem = {title: book.title,author: book.author, bookID: book.id, from: bookID[1], loanID: bookID[2], rentalDate: bookID[3], userID: bookID[4]};
             output.push(elem);
             cb();
           }).fail(function(error){
@@ -68,12 +68,13 @@ module.exports = {
         var output = [];
         for(let loan of Loans){
           if(loan.returnDate==""){
-            let pair = []
-            pair.push(loan.bookID)
-            pair.push(loan.to_collectionID)
-            pair.push(loan.id)
-
-            output.push(pair)
+            let bundle = []
+            bundle.push(loan.bookID)
+            bundle.push(loan.to_collectionID)
+            bundle.push(loan.id)
+            bundle.push(loan.rentalDate)
+            bundle.push(loan.userID)
+            output.push(bundle)
           }
         }
         return callback(output);
@@ -89,11 +90,13 @@ module.exports = {
         var output = [];
         for(let loan of Loans){
           if(loan.returnDate==""){
-            let pair = []
-            pair.push(loan.bookID)
-            pair.push(loan.from_collectionID)
-            pair.push(loan.id)
-            output.push(pair)
+            let bundle = []
+            bundle.push(loan.bookID)
+            bundle.push(loan.from_collectionID)
+            bundle.push(loan.id)
+            bundle.push(loan.rentalDate)
+            bundle.push(loan.userID)
+            output.push(bundle)
           }
         }
         return callback(output);

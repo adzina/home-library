@@ -1,0 +1,23 @@
+<navbar></navbar>
+<div class="container">
+  <h3>Details</h3>
+  <table>
+    <tr>
+      <td><b>{{title}}</b>, {{author}}</td>
+    </tr>
+    <tr>
+      <td>rental date: {{rentalDate}}</td>
+    </tr>
+    <tr>
+      <td *ngIf="user!=null">to: {{user.username}}</td>
+    </tr>
+    <tr>
+      <td *ngIf="user!=null">email: {{user.email}}</td>
+    </tr>
+    <tr>
+      <td *ngIf="user==null">Rented to a person outside the system</td>
+    </tr>
+
+
+  </table>
+</div>

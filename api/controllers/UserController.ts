@@ -16,7 +16,7 @@ module.exports = {
        if (err) {
          sails.log.debug("Error in: creating user");
          sails.log.error(err);
-         return res.serverError(err); }
+         return res.serverError("validation error"); }
 
        sails.log.debug("User created");
        return res.json(200);

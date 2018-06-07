@@ -7,7 +7,27 @@ h2{
   text-shadow: 1px 1px #595959;
 }
 .container{
-    min-width: 100%;
+  max-width: 50%;
+  margin-left: 25%;
+  margin-right: 25%;
+  text-align: center;
+  padding: 5%;
+}
+.message{
+  margin-top: 40px;
+  clear: both;
+}
+@media only screen and (max-width: 500px){
+  .container{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+}
+
+.wrong{
+  background-color: #ff9999;
+  border: 1px solid red;
 }
 table{
   min-width: 100%;
@@ -35,10 +55,6 @@ div.error{
 }
 form{
   display: block;
-}
-.login-form{
-  max-width: 50%;
-  margin-bottom: 60px;
 }
 input{
   min-width: 100%;

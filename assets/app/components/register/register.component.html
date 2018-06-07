@@ -1,6 +1,6 @@
 <div class="container">
   <h2>Register here</h2>
-  <form>
+  <form name="register-form">
     <div class="form-group">
       <label for="username">Username</label>
       <input id="username" type="text" name = "username" [(ngModel)]="username">
@@ -19,4 +19,5 @@
     </div>
     <button type="submit" (click)="register()">Register</button>
   </form>
+  <div id="message" class="message"></div>
 </div>

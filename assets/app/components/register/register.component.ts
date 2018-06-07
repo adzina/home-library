@@ -21,8 +21,34 @@ export class RegisterComponent implements OnInit {
               private _router: Router) { }
 
   ngOnInit() {
+    document.getElementById("message").style.visibility = "hidden";
+
   }
-  register1(){
+  register(){
+    if(this.username==""){
+      document.forms["register-form"].getElementsByTagName("input")[0].classList.add("wrong");
+      return 0
+    }
+    if(this.email==""){
+      document.forms["register-form"].getElementsByTagName("input")[1].classList.add("wrong");
+      return 0
+    }
+    if (!this.validateEmail(this.email)){
+      document.forms["register-form"].getElementsByTagName("input")[1].classList.add("wrong");
+      document.getElementById("message").textContent = "Incorrect email";
+      document.getElementById("message").classList.add("wrong");
+      document.getElementById("message").style.visibility = "visible";
+
+      return 0
+    }
+    if(this.password==""){
+      document.forms["register-form"].getElementsByTagName("input")[2].classList.add("wrong");
+      document.forms["register-form"].getElementsByTagName("input")[3].classList.add("wrong");
+      document.getElementById("message").textContent = "Type in a password";
+      document.getElementById("message").classList.add("wrong");
+      document.getElementById("message").style.visibility = "visible";
+      return 0
+    }
     if(this.password==this.confirmed_password){
 
       let url = this._backendService.getUrl();
@@ -35,16 +61,29 @@ export class RegisterComponent implements OnInit {
           this._router.navigate(['']);
       },
       error=>{
+        console.log(error);
+        document.getElementById("message").textContent = error._body;
+        document.getElementById("message").classList.add("wrong");
+        document.getElementById("message").style.visibility = "visible";
 
       })
     }
+    else{
+      document.forms["register-form"].getElementsByTagName("input")[2].classList.add("wrong");
+      document.forms["register-form"].getElementsByTagName("input")[3].classList.add("wrong");
+      document.getElementById("message").textContent = "Passwords do not match";
+      document.getElementById("message").classList.add("wrong");
+      document.getElementById("message").style.visibility = "visible";
+    }
   }
-  register(){
-    console.log("akaka")
+  register2(){
     let body = {username: this.username,
                 password: this.password,
                 email: this.email};
-    return this._http.post('http://localhost:1337/email/', body)
-    ;
+    return this._http.post('http://localhost:1337/email/', body);
+  }
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 }

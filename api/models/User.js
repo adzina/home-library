@@ -7,6 +7,7 @@ module.exports = {
 		email: {type:'email', required: 'true', unique: true},
 		password: {type: 'string', required: 'true'},
 		confirmed: {type: 'boolean', required: 'true'},
+    secret: {type: 'string'}
   },
 	validationMessages: { //hand for i18n & l10n
 	   username: {

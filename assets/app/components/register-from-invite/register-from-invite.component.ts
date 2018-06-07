@@ -2,28 +2,36 @@ import { Component, OnInit } from '@angular/core';
 import { Observable,Observer } from 'rxjs/Rx';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { BackendService } from '../../services/backend.service';
-import { Router } from '@angular/router';
+import {Router, ActivatedRoute, Params} from '@angular/router';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  selector: 'app-register-from-invite',
+  templateUrl: './register-from-invite.component.html',
+  styleUrls: ['./register-from-invite.component.scss']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterFromInviteComponent implements OnInit {
   username: string;
   email: string;
   password: string;
   confirmed_password: string;
+  secret: string;
+  collId: string;
   constructor(private _http:Http,
               private _backendService: BackendService,
-              private _router: Router) { }
+              private _router: Router,
+              private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     document.getElementById("message").style.visibility = "hidden";
+    this.activatedRoute.params.subscribe((params: Params) => {
+       this.secret = params['secret'];
+       this.collId = params['collID'];
+     });
+ }
 
-  }
+
   register(){
     if(this.username==""){
       document.forms["register-form"].getElementsByTagName("input")[0].classList.add("wrong");
@@ -54,11 +62,13 @@ export class RegisterComponent implements OnInit {
       let url = this._backendService.getUrl();
       let body = {username: this.username,
                   password: this.password,
-                  email: this.email};
-      this._http.post(url+"/user", body)
+                  email: this.email,
+                  secret: this.secret,
+                  collectionID: this.collId};
+      this._http.post(url+"/user/register-from-invite", body)
       .map((res:Response) => res.json())
       .subscribe(res=>{
-          console.log("localhost:1337/user/register/"+res.id+"/"+res.secret);
+          console.log(res);
           this._router.navigate(['']);
       },
       error=>{

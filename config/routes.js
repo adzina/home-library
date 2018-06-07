@@ -16,6 +16,9 @@ module.exports.routes = {
      '/register': {
        view: 'homepage'
      },
+     '/register-from-invite/:secret/:collID':{
+       view: 'homepage'
+     },
 
      'GET /collection/homeCollection/:ownerID': 'CollectionController.getHomeCollection',
 
@@ -45,6 +48,8 @@ module.exports.routes = {
      'GET /user': 'UserController.getAllUsers',
      'POST /user/login': 'UserController.login',
      'GET /user/find/:email': 'UserController.find',
+     'GET /user/register/:id/:secret': 'UserController.confirm',
+     'POST /user/register-from-invite': 'UserController.confirmAndAddToCollection',
 
      'POST /scrape': 'ScrapeController.scrape'
 

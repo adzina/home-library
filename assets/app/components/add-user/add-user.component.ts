@@ -22,7 +22,7 @@ export class AddUserComponent implements OnInit {
   ngOnInit() {
   }
 
-  send_invite(form: NgForm) {
+  sendInvite(form: NgForm) {
     let collectionID = localStorage.getItem("collectionID");
     this._backendService.findUserByEmail(this.email).subscribe(data => {
       if (data.id != "")
@@ -30,7 +30,17 @@ export class AddUserComponent implements OnInit {
           this.info = "User successfully added to collection";
           form.reset();
         })
-      else
+      else{
+
+        let secret = Math.floor(Math.random() * 100000000).toString();
+        console.log(secret);
+        console.log(collectionID);
+        console.log("localhost:1337/register-from-invite/"+secret+"/"+collectionID);
+        this._backendService.addUserToCollection(collectionID, secret).subscribe(d=>{
+          this.info = "Invititation has been sent";
+          form.reset();
+        })
+      }
       //TODO: wyslac maila z zaproszeniem do kolekcji, niech przekierowuje do strony
       // register and add to collection. Po wprowadzeniu username i password user zostanie
       //dodany do kolekcji

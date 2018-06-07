@@ -7,11 +7,12 @@ module.exports = {
     let username= req.param("username"),
         email= req.param("email"),
         password= req.param("password");
-
+    let secret = Math.floor(Math.random() * 100000000);
     return sails.models.user.create({username:username,
                                     email: email,
                                     password: password,
-                                    confirmed: false})
+                                    confirmed: false,
+                                    secret: secret})
       .exec(function (err:any, user:any){
        if (err) {
          sails.log.debug("Error in: creating user");
@@ -19,11 +20,49 @@ module.exports = {
          return res.serverError("validation error"); }
 
        sails.log.debug("User created");
-       return res.json(200);
+       setTimeout(function(){
+         sails.models.user.destroy({username:username}).exec(function(){
+           console.log("user deleted");
+         })
+       }, 24*60*60*1000);
+       return res.json({secret: secret, id:user.id});
 
 
      });
 
+  },
+  confirm: function(req,res){
+    let id = req.param("id");
+    let secret = req.param("secret");
+    return sails.models.user.update({id:id,secret: secret},
+                                    {registered:true})
+                                    .exec(function(user,err){
+                                      if(user==null || err)
+                                        return res.html("<h2>Your token has timed out</h2>")
+                                      console.log("user registred");
+                                      return res.html("<h2>You can log in now</h2>");
+                                    })
+  },
+  confirmAndAddToCollection: async function(req,res){
+    let id = req.param("id");
+    let secret = req.param("secret");
+    let collID = req.param("collID");
+    let username = req.param("username");
+    let email = req.param("email");
+    let password = req.param("password");
+
+    await sails.models.user.create({username:username,
+                                    email: email,
+                                    password: password,
+                                    confirmed: true}).exec(function(){
+                                      console.log("user created");
+                                    });
+    await sails.models.collectionuser.update({userID:secret,collectionID: collID},{userID:id}).exec(function(){
+
+        console.log("user created");
+    });
+
+    return res.json("You have been added to the collection, you can log in now");
   },
   find: function(req, res){
     sails.models.user.findOne({

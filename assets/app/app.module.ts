@@ -17,6 +17,7 @@ import { LibrariesComponent } from './components/libraries/libraries.component';
 import { RentABookComponent } from './components/rent-a-book/rent-a-book.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { RentalDetailsComponent } from './components/rental-details/rental-details.component';
+import { RegisterFromInviteComponent } from './components/register-from-invite/register-from-invite.component';
 
 import {AppRoutingModule} from './app.routing.module';
 import { BackendService } from './services/backend.service';
@@ -44,7 +45,8 @@ export function authHttpServiceFactory(http: Http, options: RequestOptions) {
     LibrariesComponent,
     RentABookComponent,
     AddUserComponent,
-    RentalDetailsComponent
+    RentalDetailsComponent,
+    RegisterFromInviteComponent
   ],
   imports: [
     BrowserModule,

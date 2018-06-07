@@ -10,6 +10,7 @@ import { LibrariesComponent } from './components/libraries/libraries.component';
 import { RentABookComponent } from './components/rent-a-book/rent-a-book.component';
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { RentalDetailsComponent } from './components/rental-details/rental-details.component';
+import { RegisterFromInviteComponent } from './components/register-from-invite/register-from-invite.component';
 // Define the routes
 export const routes = [
   {
@@ -52,7 +53,10 @@ export const routes = [
     path: 'rental-details',
     component: RentalDetailsComponent
   },
-
+  {
+    path: 'register-from-invite/:secret/:collID',
+    component: RegisterFromInviteComponent
+  },
    { //Redirect urls not found at root
        path: '**',
        redirectTo: ''

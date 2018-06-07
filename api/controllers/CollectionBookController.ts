@@ -51,5 +51,17 @@ module.exports = {
 																							console.log(deleted)
 																							return res.json(200)
 																						})
+			},
+			addBookToCollection: function(req, res){
+				let collectionID = req.param("collectionID");
+				let bookID = req.param("bookID");
+				sails.models.collectionbook.findOne({collectionID:collectionID, bookID: bookID}).exec(function(colBook, err){
+					if(colBook){
+						return res.json(505);
+					}
+					if(!colBook){
+
+					}
+				})
 			}
 };

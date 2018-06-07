@@ -1,12 +1,12 @@
 <navbar></navbar>
 <div class="container">
   <h2>Add new book to your collection</h2>
-  <form #linkForm = "ngForm" (ngSubmit) = "add_by_link(linkForm)">
+  <form #linkForm = "ngForm" (ngSubmit) = "search_book(linkForm)">
     <label for="link">Link</label>
     <input type="text" name="link" id="link" ngModel><br>
-    <button type="submit">Add book</button>
+    <button type="submit">Search the book</button>
   </form><br>
-  <form #fieldsForm = "ngForm" (ngSubmit)="add_by_hand(fieldsForm)">
+  <form #fieldsForm = "ngForm" name="fieldsForm" (ngSubmit)="add_by_hand(fieldsForm)">
     <label for="title">Title</label>
     <input type="text" name="title" id="title" ngModel><br>
     <label for="author">Author</label>
@@ -15,6 +15,8 @@
     <input type="number" name="year" id="year" ngModel><br>
     <label for="pages">Pages</label>
     <input type="number" name="pages" id="pages" ngModel><br>
+    <label for="checkbox">Rented from outside</label>
+    <input type="checkbox" style="float:left" class="filled-in form-check-input" id="checkbox"><br>
     <button type="submit">Add book</button>
   </form>
   <div *ngIf="error!=undefined" class="error">

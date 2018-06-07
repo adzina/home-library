@@ -18,10 +18,7 @@
   </div>
   <div *ngIf="collection!=undefined">
     <h2>{{collection.name}}</h2>
-
-    <table>
-      <tr>
-        <td>
+    <div>
           <h3>Books</h3>
           <p class="pull-left">
             <a (click)="navigate_book()">
@@ -34,7 +31,8 @@
           <div *ngFor="let book of availableToMe" class="enum">
             <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="read(book)">Read</button>
           </div>
-        </td>
+    </div>
+    <div>
           <h3>Users</h3>
           <p class="pull-left">
             <a (click)="navigate_user()">
@@ -44,7 +42,8 @@
           <div *ngFor="let user of users" class="enum">
             <span *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
           </div>
-        <td>
+      </div>
+      <div>
           <h3>Rented</h3>
           <p class="pull-left">
             <a (click)="navigate_rent()">
@@ -54,12 +53,6 @@
           <div *ngFor="let loan of loans; let i = index" class="enum">
             <div class="link" (click)="seeLoanDetails(i)"><b>{{loan.title}}</b> {{loan.author}}</div> <button (click)="return(loan)">Return</button>
           </div>
-        </td>
-      </tr>
-      <tr>
-        <td>
-        </td>
-      </tr>
-    </table>
+      </div>
   </div>
 </div>

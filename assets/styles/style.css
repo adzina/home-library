@@ -9,18 +9,13 @@ h2{
 .container{
   max-width: 50%;
   text-align: center;
-  padding: 5%;
+  padding: 10%;
+  margin-bottom: 10px;
+  margin-top:10px;
 }
 .message{
   margin-top: 40px;
   clear: both;
-}
-@media only screen and (max-width: 500px){
-  .container{
-    max-width: 90%;
-    margin-left: 5%;
-    margin-right: 5%;
-  }
 }
 
 .wrong{
@@ -44,12 +39,14 @@ div{
 div.info{
   border: 1px solid blue;
   background-color: aqua;
-  padding: 10%;
+  padding: 2%;
+  margin-top: 80px;
 }
 div.error{
   border: 1px solid red;
   background-color: salmon;
-  padding: 10%;
+  padding: 2%;
+  margin-top: 80px;
 }
 form{
   display: block;
@@ -94,9 +91,27 @@ p{
 .enum{
   clear:both;
   max-width: 90%;
+  border: dotted;
+  min-height: 40px;
 }
 h3{
   clear: both;
   text-shadow: 1px 1px #595959;
   color: #df80ff;
+}
+@media only screen and (max-width: 800px){
+  .container{
+    max-width: 90%;
+    margin-left: 5%;
+    margin-right: 5%;
+  }
+  .enum{
+    min-height: 100px;
+  }
+  button{
+    float:none;
+  }
+  span{
+    clear: both;
+  }
 }

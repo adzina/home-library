@@ -4,22 +4,24 @@
     <h2>{{collection.name}}</h2>
 
       <div>
-          <h3>Books</h3>
-          <p class="pull-left">
-            <a (click)="navigate_book()">
-              <span class="glyphicon glyphicon-plus"></span> Add new book
-            </a>
-          </p>
-          <div *ngFor="let book of currentlyRead" class="enum">
-            <span class="link" (click)="seeBook(book)"><b>{{book.title}}</b>, {{book.author}}</span><button (click)="finish(book)">Finished</button>
-          </div>
-          <div *ngFor="let book of availableToMe" class="enum">
-            <span class="link" (click)="seeBook(book)"><b>{{book.title}}</b>, {{book.author}}</span><button (click)="read(book)">Read</button>
-          </div>
+          <h3 (click)="toggle('books')" class="expandable">Books</h3>
+          <div id="books" class="hiddenDiv">
+            <p class="pull-left">
+              <a (click)="navigate_book()">
+                <span class="glyphicon glyphicon-plus"></span> Add new book
+              </a>
+            </p>
+            <div *ngFor="let book of currentlyRead" class="enum">
+              <span class="link" (click)="seeBook(book)"><b>{{book.title}}</b>, {{book.author}}</span><button (click)="finish(book)">Finished</button>
+            </div>
+            <div *ngFor="let book of availableToMe" class="enum">
+              <span class="link" (click)="seeBook(book)"><b>{{book.title}}</b>, {{book.author}}</span><button (click)="read(book)">Read</button>
+            </div>
+        </div>
       </div>
       <div>
-          <h3>Users</h3>
-          <div *ngFor="let user of users" class="enum">
+          <h3 (click)="toggle('users')" class="expandable">Users</h3>
+          <div *ngFor="let user of users" class="enum" id="users" class="hiddenDiv">
             <span *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
           </div>
       </div>

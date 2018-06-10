@@ -50,6 +50,7 @@ div.error{
 }
 form{
   display: block;
+  margin-bottom: 70px;
 }
 input{
   min-width: 100%;
@@ -69,7 +70,6 @@ button{
   min-width: 0px;
 }
 .register-button{
-  margin-right: 50%;
   float: right;
   background: #1affa3;
 }
@@ -85,14 +85,15 @@ div.container-elem{
   font-style: italic;
   font-size: 20px;
 }
-p{
-  clear: both;
+.register-p{
+  float: left;
 }
 .enum{
   clear:both;
-  max-width: 90%;
+  max-width: 100%;
   border: dotted;
   min-height: 40px;
+  min-width: 400px;
   padding: 3px;
 }
 h3{
@@ -106,19 +107,39 @@ h3{
 .list-elem{
   float:left;
 }
+.visible{
+  max-width: 4000px;
+  max-height: 4000px;
+  -webkit-transition: max-height 0.7s;
+  -moz-transition: max-height 0.7s;
+  transition: max-height 0.7s;
+}
+.hiddenDiv{
+  max-width: 0px;
+  max-height: 0px;
+  -webkit-transition: max-height 0.7s;
+  -moz-transition: max-height 0.7s;
+  transition: max-height 0.7s;
+  display: none;
+
+}
+.expandable{
+  min-width: 100%;
+  cursor: pointer;
+  background-color: grey;
+  color: black;
+  padding: 10px;
+  border-radius: 5px;
+}
+.expandable:hover{
+  background-color: black;
+  color: white;
+}
 @media only screen and (max-width: 800px){
   .container{
     max-width: 90%;
     margin-left: 5%;
     margin-right: 5%;
   }
-  .enum{
-    min-height: 100px;
-  }
-  button{
-    float:none;
-  }
-  span{
-    clear: both;
-  }
+
 }

@@ -19,49 +19,57 @@
   <div *ngIf="collection!=undefined">
     <h2>{{collection.name}}</h2>
     <div>
-          <h3>Books</h3>
-          <p class="pull-left">
-            <a (click)="navigate_book()">
-              <span class="glyphicon glyphicon-plus"></span> Add new book
-            </a>
-          </p>
-          <div *ngFor="let book of currentlyRead" class="enum">
-            <span class="list-elem"><b>{{book.title}}</b>, {{book.author}}</span>
-            <button class="list-button" (click)="finish(book)">Finished</button>
-          </div>
-          <div *ngFor="let book of availableToMe" class="enum">
-            <span class="list-elem"><b>{{book.title}}</b>, {{book.author}}</span>
-            <button class="list-button" (click)="read(book)">Read</button>
+          <h3 (click)="toggle('books')" class="expandable">Books</h3>
+          <div id="books" class="hiddenDiv">
+            <p class="pull-left">
+              <a (click)="navigate_book()">
+                <span class="glyphicon glyphicon-plus"></span> Add new book
+              </a>
+            </p>
+            <div *ngFor="let book of currentlyRead" class="enum">
+              <span class="list-elem"><b>{{book.title}}</b>, {{book.author}}</span>
+              <button class="list-button" (click)="finish(book)">Finished</button>
+            </div>
+            <div *ngFor="let book of availableToMe" class="enum">
+              <span class="list-elem"><b>{{book.title}}</b>, {{book.author}}</span>
+              <button class="list-button" (click)="read(book)">Read</button>
+            </div>
           </div>
     </div>
     <div>
-          <h3>Users</h3>
-          <p class="pull-left">
-            <a (click)="navigate_user()">
-              <span class="glyphicon glyphicon-plus"></span> Add new user
-            </a>
-          </p>
-          <div *ngFor="let user of users" class="enum">
-            <span class="list-elem" *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
-          </div>
-      </div>
+          <h3 (click)="toggle('users')" class="expandable">Users</h3>
+          <div id="users" class="hiddenDiv">
+            <p class="pull-left">
+              <a (click)="navigate_user()">
+                <span class="glyphicon glyphicon-plus"></span> Add new user
+              </a>
+            </p>
+            <div *ngFor="let user of users" class="enum">
+              <span class="list-elem" *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
+            </div>
+        </div>
+    </div>
       <div>
-          <h3>Rented</h3>
-          <p class="pull-left">
-            <a (click)="navigate_rent()">
-              <span class="glyphicon glyphicon-plus"></span> Rent a book
-            </a>
-          </p>
-          <div *ngFor="let b of borrowings; let i = index" class="enum">
-            <span class="list-elem link" (click)="seeLoanDetails(i)"><b>{{b.title}}</b> {{b.author}}</span>
-             <button class="list-button" (click)="return(b)">Return</button>
-          </div>
+          <h3 (click)="toggle('rented')" class="expandable">Rented</h3>
+          <div id="rented" class="hiddenDiv">
+            <p class="pull-left">
+              <a (click)="navigate_rent()">
+                <span class="glyphicon glyphicon-plus"></span> Rent a book
+              </a>
+            </p>
+            <div *ngFor="let b of borrowings; let i = index" class="enum">
+              <span class="list-elem link" (click)="seeLoanDetails(i)"><b>{{b.title}}</b> {{b.author}}</span>
+               <button class="list-button" (click)="return(b)">Return</button>
+            </div>
+        </div>
       </div>
-      <div>
-          <h3>Borrowed from outside</h3>
-          <div *ngFor="let b of loans; let i = index" class="enum">
-            <span class="list-elem"><b>{{b.title}}</b> {{b.author}}</span>
-            <button class="list-button" (click)="returnFromOutside(b)">Return</button>
+      <div class="hiddenDiv">
+          <h3 (click)="toggle('borrowed')" class="expandable">Borrowed from outside</h3>
+          <div id="borrowed">
+            <div *ngFor="let b of loans; let i = index" class="enum">
+              <span class="list-elem"><b>{{b.title}}</b> {{b.author}}</span>
+              <button class="list-button" (click)="returnFromOutside(b)">Return</button>
+            </div>
           </div>
       </div>
   </div>

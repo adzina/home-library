@@ -176,4 +176,11 @@ export class HomeCollectionComponent implements OnInit {
     },err=>console.log(err))
 
   }
+  toggle(id: string){
+    var elem = document.getElementById(id);
+    if(elem.className=="hiddenDiv")
+      elem.className = "visible"
+    else
+        elem.className = "hiddenDiv"
+  }
 }

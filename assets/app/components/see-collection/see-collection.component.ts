@@ -98,4 +98,11 @@ export class SeeCollectionComponent implements OnInit {
     localStorage.setItem("bookID", book.id);
     this._router.navigate(['./see-book']);
   }
+  toggle(id: string){
+    var elem = document.getElementById(id);
+    if(elem.className=="hiddenDiv")
+      elem.className = "visible"
+    else
+        elem.className = "hiddenDiv"
+  }
 }

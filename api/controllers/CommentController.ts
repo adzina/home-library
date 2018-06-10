@@ -7,15 +7,13 @@
 
 module.exports = {
 	getBooksComments: function(req,res){
-		let bookID = req.params("bookID");
+		let bookID = req.param("bookID");
+		console.log("komentarze");
+		console.log(bookID);
+		sails.models.comment.find({bookID: bookID}).exec(function(err,comments){
+					console.log(comments);
+					return res.json(comments);
 
-		sails.models.comment.find({bookID: bookID}).exec(async function(comments,err){
-					let prs=[]
-					for(let comment of comments){
-						let pr = await sails.models.user.findOne({id:comment.userID});
-						prs.push(pr);
-					}
-					
 			})
 		}
 	};

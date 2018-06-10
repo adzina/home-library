@@ -6,7 +6,7 @@
       <td><b>{{title}}</b>, {{author}}</td>
     </tr>
     <tr>
-      <td>rental date: {{rentalDate}}</td>
+      <td>rental date: {{rentalDate.getDate()}}.{{rentalDate.getMonth()+1}}.{{rentalDate.getFullYear()}} </td>
     </tr>
     <tr>
       <td *ngIf="user!=null">to: {{user.username}}</td>

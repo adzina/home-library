@@ -170,8 +170,8 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error finding the book"));
   }
-  getBookComments(id:string): Observable<Comment[]>{
-    let url = this.url+"/booksComments/"+id;
+  getBookComments(id:string): Observable<any[]>{
+    let url = this.url+"/comment/booksComments/"+id;
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error finding comments"));
   }

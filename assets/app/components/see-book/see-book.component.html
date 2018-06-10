@@ -1,6 +1,6 @@
 <navbar></navbar>
 <div class="container">
-  <div class="jumbotron" style="text-align: left">
+  <div class="jumbotron" style="text-align: left" *ngIf="book!=undefined">
     TITLE:  {{book.title}}<br>
     AUTHOR: {{book.author}}<br>
     PAGES:  {{book.pages}}<br>
@@ -10,7 +10,14 @@
     <textarea rows="4" cols="50"></textarea><br>
     <button type="submit" (click)="addComment()">Add comment</button>
   </form>
+  <div  *ngIf="comments!=undefined">
   <div *ngFor="let comment of comments">
-    {{comment.text}}
-  </div>
+    <div class="comment-header">
+      {{comment.date.getDate()}}.{{comment.date.getMonth()+1}}.{{comment.date.getFullYear()}}
+    </div>
+    <div class="comment-body">
+      {{comment.text}}
+    </div>
+    </div>
+</div>
 </div>

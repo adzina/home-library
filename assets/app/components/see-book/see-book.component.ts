@@ -23,9 +23,16 @@ export class SeeBookComponent implements OnInit {
     let bookID = localStorage.getItem("bookID");
     this._backendService.getBookByID(bookID).subscribe(book=>{
       this.book = book;
-      /*this._backendService.getBookComments(bookID).subscribe(comments=>{
+      this._backendService.getBookComments(bookID).subscribe(comments=>{
+        for(let comment of comments){
+          comment.date = new Date(comment.date);
+        }
         this.comments = comments;
-      })*/
+        this.comments = comments.sort((obj1, obj2)=>{
+          if (obj1.date < obj2.date) return 1
+          if (obj1.date > obj2.date) return -1
+        })
+      })
     })
   }
   addComment(){
@@ -33,9 +40,9 @@ export class SeeBookComponent implements OnInit {
     document.getElementsByTagName("textarea")[0].value= "";
     this._backendService.addComment(this.book.id, text, localStorage.getItem("userID")).subscribe(data=>{
       this.comments = [];
-      /*this._backendService.getBookComments(bookID).subscribe(comments=>{
+      this._backendService.getBookComments(this.book.id).subscribe(comments=>{
         this.comments = comments;
-      })*/
+      })
     })
   }
 

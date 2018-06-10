@@ -23,23 +23,35 @@ export class AddUserComponent implements OnInit {
   }
 
   sendInvite(form: NgForm) {
-    let collectionID = localStorage.getItem("collectionID");
-    this._backendService.findUserByEmail(this.email).subscribe(data => {
-      if (data.id != "")
-        this._backendService.addUserToCollection(collectionID, data.id).subscribe(d => {
-          this.info = "User successfully added to collection";
-          form.reset();
-        })
-      else{
 
-        let secret = Math.floor(Math.random() * 100000000).toString();
-        console.log("localhost:1337/register-from-invite/"+secret+"/"+collectionID);
-        this._backendService.addUserToCollection(collectionID, secret).subscribe(d=>{
-          this.info = "Invititation has been sent";
-          form.reset();
-        })
-      }
-    })
+    if(this.validateEmail(document.getElementById("email").textContent)){
+      document.getElementById("email").classList.remove("wrong");
+      let collectionID = localStorage.getItem("collectionID");
+      this._backendService.findUserByEmail(this.email).subscribe(data => {
+        if (data.id != "")
+          this._backendService.addUserToCollection(collectionID, data.id).subscribe(d => {
+            this.info = "User successfully added to collection";
+            form.reset();
+          })
+        else{
 
+          let secret = Math.floor(Math.random() * 100000000).toString();
+          console.log("localhost:1337/register-from-invite/"+secret+"/"+collectionID);
+          this._backendService.addUserToCollection(collectionID, secret).subscribe(d=>{
+            this.info = "Invititation has been sent";
+            form.reset();
+          })
+        }
+      })
+    }
+    else{
+        document.getElementById("email").classList.add("wrong");
+    }
+
+
+  }
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
   }
 }

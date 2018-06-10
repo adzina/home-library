@@ -93,11 +93,18 @@ p{
   max-width: 90%;
   border: dotted;
   min-height: 40px;
+  padding: 3px;
 }
 h3{
   clear: both;
   text-shadow: 1px 1px #595959;
   color: #df80ff;
+}
+.list-button{
+  float:right;
+}
+.list-elem{
+  float:left;
 }
 @media only screen and (max-width: 800px){
   .container{

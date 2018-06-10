@@ -26,10 +26,12 @@
             </a>
           </p>
           <div *ngFor="let book of currentlyRead" class="enum">
-            <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="finish(book)">Finished</button>
+            <span class="list-elem"><b>{{book.title}}</b>, {{book.author}}</span>
+            <button class="list-button" (click)="finish(book)">Finished</button>
           </div>
           <div *ngFor="let book of availableToMe" class="enum">
-            <span><b>{{book.title}}</b>, {{book.author}}</span><button (click)="read(book)">Read</button>
+            <span class="list-elem"><b>{{book.title}}</b>, {{book.author}}</span>
+            <button class="list-button" (click)="read(book)">Read</button>
           </div>
     </div>
     <div>
@@ -40,7 +42,7 @@
             </a>
           </p>
           <div *ngFor="let user of users" class="enum">
-            <span *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
+            <span class="list-elem" *ngIf="!user.confirmed"><b>{{user.username}}</b>, {{user.email}}</span>
           </div>
       </div>
       <div>
@@ -51,13 +53,15 @@
             </a>
           </p>
           <div *ngFor="let b of borrowings; let i = index" class="enum">
-            <span class="link" (click)="seeLoanDetails(i)"><b>{{b.title}}</b> {{b.author}}</span> <button (click)="return(b)">Return</button>
+            <span class="list-elem link" (click)="seeLoanDetails(i)"><b>{{b.title}}</b> {{b.author}}</span>
+             <button class="list-button" (click)="return(b)">Return</button>
           </div>
       </div>
       <div>
           <h3>Borrowed from outside</h3>
           <div *ngFor="let b of loans; let i = index" class="enum">
-            <span><b>{{b.title}}</b> {{b.author}}</span> <button (click)="returnFromOutside(b)">Return</button>
+            <span class="list-elem"><b>{{b.title}}</b> {{b.author}}</span>
+            <button class="list-button" (click)="returnFromOutside(b)">Return</button>
           </div>
       </div>
   </div>

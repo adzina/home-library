@@ -33,38 +33,45 @@ export class RentABookComponent implements OnInit {
     })
   }
   rentBook(form: NgForm){
-    let from_collectionID = localStorage.getItem("collectionID");
-    let bookID = form.value["book"].id;
-    let user = form.value["user"];
-
-    if(user==undefined){
-      this._backendService.removeBookFromCollection(from_collectionID, bookID).subscribe(res=>{
-      },err=>{
-        console.log(err)
-      });
-      this._backendService.rentABook(from_collectionID,(-1).toString(), bookID, (-1).toString()).subscribe(data=>{
-
-        this.info = "Outside loan successfully registered";
-        form.reset();
-      })
+    if(form.value["book"]==undefined){
+      document.getElementById("book").classList.add("wrong");
     }
     else{
-      this._backendService.getHomeCollection(user.id).subscribe(data=>{
-        let to_collectionID = data.id;
+      document.getElementById("book").classList.remove("wrong");
+      let from_collectionID = localStorage.getItem("collectionID");
+      let bookID = form.value["book"].id;
+      let user = form.value["user"];
+
+      if(user==undefined){
         this._backendService.removeBookFromCollection(from_collectionID, bookID).subscribe(res=>{
         },err=>{
           console.log(err)
         });
-        this._backendService.addBookToCollection(to_collectionID, bookID).subscribe(res=>{
-        },err=>{
-          console.log(err)
-        });
-        this._backendService.rentABook(from_collectionID,to_collectionID, bookID, user.id).subscribe(data=>{
+        this._backendService.rentABook(from_collectionID,(-1).toString(), bookID, (-1).toString()).subscribe(data=>{
 
-          this.info = "Loan successfully registered";
+          this.info = "Outside loan successfully registered";
           form.reset();
         })
-      })
+      }
+      else{
+        this._backendService.getHomeCollection(user.id).subscribe(data=>{
+          let to_collectionID = data.id;
+          this._backendService.removeBookFromCollection(from_collectionID, bookID).subscribe(res=>{
+          },err=>{
+            console.log(err)
+          });
+          this._backendService.addBookToCollection(to_collectionID, bookID).subscribe(res=>{
+          },err=>{
+            console.log(err)
+          });
+          this._backendService.rentABook(from_collectionID,to_collectionID, bookID, user.id).subscribe(data=>{
+
+            this.info = "Loan successfully registered";
+            form.reset();
+          })
+        })
+      }
+
     }
 
 

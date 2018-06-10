@@ -50,8 +50,14 @@
               <span class="glyphicon glyphicon-plus"></span> Rent a book
             </a>
           </p>
-          <div *ngFor="let loan of loans; let i = index" class="enum">
-            <div class="link" (click)="seeLoanDetails(i)"><b>{{loan.title}}</b> {{loan.author}}</div> <button (click)="return(loan)">Return</button>
+          <div *ngFor="let b of borrowings; let i = index" class="enum">
+            <span class="link" (click)="seeLoanDetails(i)"><b>{{b.title}}</b> {{b.author}}</span> <button (click)="return(b)">Return</button>
+          </div>
+      </div>
+      <div>
+          <h3>Borrowed from outside</h3>
+          <div *ngFor="let b of loans; let i = index" class="enum">
+            <span><b>{{b.title}}</b> {{b.author}}</span> <button (click)="returnFromOutside(b)">Return</button>
           </div>
       </div>
   </div>

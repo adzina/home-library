@@ -11,6 +11,7 @@ import { RentABookComponent } from './components/rent-a-book/rent-a-book.compone
 import { AddUserComponent } from './components/add-user/add-user.component';
 import { RentalDetailsComponent } from './components/rental-details/rental-details.component';
 import { RegisterFromInviteComponent } from './components/register-from-invite/register-from-invite.component';
+import { SeeBookComponent } from './components/see-book/see-book.component';
 // Define the routes
 export const routes = [
   {
@@ -56,6 +57,10 @@ export const routes = [
   {
     path: 'register-from-invite/:secret/:collID',
     component: RegisterFromInviteComponent
+  },
+  {
+    path: 'see-book',
+    component: SeeBookComponent
   },
    { //Redirect urls not found at root
        path: '**',

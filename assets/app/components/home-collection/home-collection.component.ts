@@ -24,7 +24,8 @@ export class HomeCollectionComponent implements OnInit {
   private currentlyRead: Book[];
   private availableToMe: Book[];
   private readings: Reading[];
-  private loans: Loan[];
+  private loans: Loan[] = [];
+  private borrowings: Loan[];
   ngOnInit() {
     this.userID = localStorage.getItem("userID")
     this.getMyCollection()
@@ -33,6 +34,7 @@ export class HomeCollectionComponent implements OnInit {
     this._backendService.getHomeCollection(this.userID).subscribe(data=>{
       this.collection = data;
 
+      this.getMyBorrowings();
       this.getMyLoans();
 
       this._backendService.getCollectionBooks(this.collection.id).subscribe(data=>{
@@ -53,11 +55,28 @@ export class HomeCollectionComponent implements OnInit {
         console.log(err)
       })
   }
-  getMyLoans(){
+  getMyBorrowings(){
     this._backendService.findMyBorrowings(this.collection.id).subscribe(data=>{
-      this.loans = data;
-      console.log(this.loans)
+      this.borrowings = data;
+      console.log(this.borrowings);
     })
+  }
+  getMyLoans(){
+    this._backendService.findMyLoans(this.collection.id).subscribe(data=>{
+      for(let i of data){
+        if(i.from == -1){
+          this.loans.push(i);
+        }
+      }
+    })
+  }
+  refresh(){
+    this.borrowings = [];
+    this.loans = [];
+
+    this.getMyBorrowings();
+    this.getMyLoans();
+    this.divideBooks();
   }
   seeLoanDetails(i: number){
 
@@ -94,7 +113,8 @@ export class HomeCollectionComponent implements OnInit {
     .subscribe(data=>{
         this._backendService.addUserToCollection(data.id, this.userID).subscribe(data=>{
           this.info = "Collection successfully created";
-          this._router.navigate(["./home-collection"]);
+          this.collection = data;
+          this.refresh();
         })
 
     },
@@ -112,7 +132,6 @@ export class HomeCollectionComponent implements OnInit {
   }
   navigate_rent(){
     this._router.navigate(['./rent-a-book']);
-
   }
   read(book: Book){
     this._backendService.addReading(book.id, this.userID).subscribe(data=>{
@@ -120,14 +139,24 @@ export class HomeCollectionComponent implements OnInit {
     })
   }
   return(loan: Loan){
-    this._backendService.removeBookFromCollection(loan.to, loan.bookID.toString()).subscribe(data1=>{
+    if(loan.from==-1){
+      console.log("returning loan from outside");
       this._backendService.addBookToCollection(this.collection.id, loan.bookID).subscribe(data2=>{
         this._backendService.returnBook(loan.loanID).subscribe(data3=>{
-          this.getMyLoans()
-          this.divideBooks()
+          this.refresh();
         })
       });
-    })
+    }
+    else{
+      this._backendService.removeBookFromCollection(loan.to, loan.bookID.toString()).subscribe(data1=>{
+        this._backendService.addBookToCollection(this.collection.id, loan.bookID).subscribe(data2=>{
+          this._backendService.returnBook(loan.loanID).subscribe(data3=>{
+            this.refresh();
+          })
+        });
+      })
+    }
+
 
 
   }
@@ -135,5 +164,16 @@ export class HomeCollectionComponent implements OnInit {
     this._backendService.updateReading(book.id, this.userID).subscribe(data=>{
       this.divideBooks();
     })
+  }
+  returnFromOutside(borrowed: Loan){
+    this._backendService.removeBookFromCollection(this.collection.id, borrowed.bookID.toString()).subscribe(data1=>{
+      this._backendService.returnBook(borrowed.loanID).subscribe(data2=>{
+        this._backendService.destroyBook(borrowed.bookID).subscribe(data3=>{
+          this.refresh();
+        },err=>console.log(err))
+
+      },err=>console.log(err))
+    },err=>console.log(err))
+
   }
 }

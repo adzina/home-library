@@ -1,0 +1,16 @@
+<navbar></navbar>
+<div class="container">
+  <div class="jumbotron" style="text-align: left">
+    TITLE:  {{book.title}}<br>
+    AUTHOR: {{book.author}}<br>
+    PAGES:  {{book.pages}}<br>
+    YEAR:   {{book.year}}
+  </div>
+  <form>
+    <textarea rows="4" cols="50"></textarea><br>
+    <button type="submit" (click)="addComment()">Add comment</button>
+  </form>
+  <div *ngFor="let comment of comments">
+    {{comment.text}}
+  </div>
+</div>

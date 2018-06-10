@@ -165,4 +165,27 @@ export class BackendService{
     return this.http.get(url).map((res:Response)=> res.json())
     .catch(err=>Observable.throw("Error finding the user"));
   }
+  getBookByID(id:string): Observable<Book>{
+    let url = this.url+"/book/"+id;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error finding the book"));
+  }
+  getBookComments(id:string): Observable<Comment[]>{
+    let url = this.url+"/booksComments/"+id;
+    return this.http.get(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error finding comments"));
+  }
+  addComment(bookID: string, text:string, userID: string){
+    let url = this.url+"/comment";
+    let date = new Date();
+    let body = JSON.stringify({bookID: bookID, userID:userID, text:text, date:date})
+    return this.http.post(url,body).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error adding comment"));
+  }
+  destroyBook(bookID: string):Observable<Book>{
+    let url = this.url+"/book/"+bookID;
+    return this.http.delete(url).map((res:Response)=> res.json())
+    .catch(err=>Observable.throw("Error deleting book"));
+
+  }
 }

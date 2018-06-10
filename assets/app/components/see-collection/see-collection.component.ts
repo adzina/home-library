@@ -94,4 +94,8 @@ export class SeeCollectionComponent implements OnInit {
       this.divideBooks();
     })
   }
+  seeBook(book:Book){
+    localStorage.setItem("bookID", book.id);
+    this._router.navigate(['./see-book']);
+  }
 }
